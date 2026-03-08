@@ -1,0 +1,28 @@
+services:
+  json2mqtt:
+    container_name: json2mqtt
+    restart: "no"
+    read_only: true
+    user: 3851:3851
+    image: oitc/json2mqtt:latest
+    environment:
+      MQTT_SERVER: test.mosquitto.org
+      MQTT_PORT: 8883
+      MQTT_TLS_enabled: true
+      MQTT_TLS_no_hostname_validation: false
+      MQTT_CACERT_FILE: /etc/ssl/certs/ca-certificates.crt
+      MQTT_USER: myMQTTUser
+      #MQTT_PASSWORD: myPass
+      MQTT_PASSWORD_FILE: /run/secrets/mqtt_password
+      MQTT_RETAIN: false
+      MQTT_TOPIC: de/oberdorf-itc/json2mqtt/no-as-a-service
+      ENDPOINT: https://naas.isalman.dev/no
+      REQUESTS_CA_BUNDLE: /etc/ssl/certs/ca-certificates.crt
+    secrets:
+      - mqtt_password
+    tmpfs:
+      - /tmp
+
+secrets:
+  mqtt_password:
+    file: /srv/docker/githubrepostats2mqtt/secrets/mqtt_password
