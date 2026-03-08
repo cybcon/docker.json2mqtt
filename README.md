@@ -31,6 +31,11 @@ Container image: [DockerHub](https://hub.docker.com/r/oitc/json2mqtt)
 The container image is based on Alpine Linux and sends a curl request result with the [mosquitto-client](https://mosquitto.org/)
 to a MQTT server topic.
 
+This is the generic version of the other tools:
+
+* [docker.githubrepostats2mqtt](https://github.com/cybcon/docker.githubrepostats2mqtt)
+* [docker.dockerhubstats2mqtt](https://github.com/cybcon/docker.dockerhubstats2mqtt)
+
 # Prerequisites to run the docker container
 You need an MQTT server to send the data to it.
 

@@ -8,7 +8,7 @@ ENV MQTT_SERVER=localhost \
     MQTT_TLS_enabled=false \
     MQTT_TLS_no_hostname_validation=false \
     MQTT_RETAIN=false \
-    REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
+    REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 
 RUN apk upgrade --available --no-cache --update \
     && apk add --no-cache --update \
