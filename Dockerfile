@@ -1,14 +1,17 @@
 FROM alpine:3.23.3
 
 LABEL maintainer="Michael Oberdorf IT-Consulting <info@oberdorf-itc.de>"
-LABEL site.local.program.version="1.0.0"
+LABEL site.local.program.version="1.1.0"
 
 ENV MQTT_SERVER=localhost \
     MQTT_PORT=1883 \
     MQTT_TLS_enabled=false \
     MQTT_TLS_no_hostname_validation=false \
     MQTT_RETAIN=false \
-    REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+    REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
+    ADD_TIMESTAMP=true \
+    TIMESTAMP_ATTR=timestamp
+
 
 RUN apk upgrade --available --no-cache --update \
     && apk add --no-cache --update \

@@ -18,6 +18,8 @@ services:
       MQTT_TOPIC: de/oberdorf-itc/json2mqtt/no-as-a-service
       ENDPOINT: https://naas.isalman.dev/no
       REQUESTS_CA_BUNDLE: /etc/ssl/certs/ca-certificates.crt
+      ADD_TIMESTAMP: true
+      TIMESTAMP_ATTR: timestamp
     secrets:
       - mqtt_password
     tmpfs:
