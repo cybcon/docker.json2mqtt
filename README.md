@@ -24,7 +24,8 @@ Container image: [DockerHub](https://hub.docker.com/r/oitc/json2mqtt)
 
 # Supported tags and respective `Dockerfile` links
 
-* [`latest`, `1.0.0`](https://github.com/cybcon/docker.json2mqtt/blob/v1.0.0/Dockerfile)
+* [`latest`, `1.1.0`](https://github.com/cybcon/docker.json2mqtt/blob/v1.1.0/Dockerfile)
+* [`1.0.0`](https://github.com/cybcon/docker.json2mqtt/blob/v1.0.0/Dockerfile)
 
 # Summary
 
@@ -46,17 +47,20 @@ The container grab the configuration via environment variables.
 
 | Environment variable name | Description | Required | Default value |
 |--|--|--|--|
-| `MQTT_SERVER` | The MQTT server hostname or IP address | **OPTIONAL** | `localhost` |
-| `MQTT_PORT` | The TCP port of the MQTT server | **OPTIONAL** | `1883` |
-| `MQTT_TLS_enabled` | Should SSL communication be enabled (`true`) or not (`false`) | **OPTIONAL** | `false` |
-| `MQTT_CACERT_FILE` | If TLS is enabled, the path to the CA certificate file to validate the MQTT server certificate | **OPTIONAL** | |
-| `MQTT_TLS_no_hostname_validation` | If TLS is enabled, skip the hostname validation of the TLS certificate | **OPTIONAL** | `false` |
-| `MQTT_USER` | The MQTT username for MQTT authentication | **OPTIONAL** | |
-| `MQTT_PASSWORD` | The MQTT password for MQTT authentication | **OPTIONAL** | |
-| `MQTT_PASSWORD_FILE` | The filepath where the MQTT password is stored for MQTT authentication | **OPTIONAL** | |
+| `MQTT_SERVER` | The MQTT server hostname or IP address | OPTIONAL | `localhost` |
+| `MQTT_PORT` | The TCP port of the MQTT server | OPTIONAL | `1883` |
+| `MQTT_TLS_enabled` | Should SSL communication be enabled (`true`) or not (`false`) | OPTIONAL | `false` |
+| `MQTT_CACERT_FILE` | If TLS is enabled, the path to the CA certificate file to validate the MQTT server certificate | OPTIONAL | |
+| `MQTT_TLS_no_hostname_validation` | If TLS is enabled, skip the hostname validation of the TLS certificate | OPTIONAL | `false` |
+| `MQTT_USER` | The MQTT username for MQTT authentication | OPTIONAL | |
+| `MQTT_PASSWORD` | The MQTT password for MQTT authentication | OPTIONAL | |
+| `MQTT_PASSWORD_FILE` | The filepath where the MQTT password is stored for MQTT authentication | OPTIONAL | |
 | `MQTT_TOPIC` | The MQTT topic to send the Github statistics to | **MANDATORY** | |
-| `MQTT_RETAIN`| Set the retain flag when publishing the Github statistics to MQTT topic | **OPTIONAL** | `false` |
+| `MQTT_RETAIN`| Set the retain flag when publishing the Github statistics to MQTT topic | OPTIONAL | `false` |
 | `ENDPOINT` | The http(s) endpoint from  where to get the json | **MANDATORY** | |
+| `ADD_TIMESTAMP` | Add a timestamp field to the 1st level of the json object. | OPTIONAL | `true` |
+| `TIMESTAMP_ATTR` | The timestamp field attribute name to add the timestamp. | OPTIONAL | `timestamp` |
+
 
 # Docker compose configuration
 

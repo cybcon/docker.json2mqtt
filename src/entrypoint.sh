@@ -7,13 +7,13 @@
 # Author: Michael Oberdorf
 # Date:   2026-03-08
 # Last changed by: Michael Oberdorf
-# Last changed at: 2026-03-08
+# Last changed at: 2026-03-14
 ##############################################################################
 
 #-----------------------------------------------------------------------------
 # Global configuration
 #-----------------------------------------------------------------------------
-VERSION="1.0.0"
+VERSION="1.1.0"
 CACERT_SYSTEM_PATH='/etc/ssl/certs'
 
 # Set default values
@@ -31,6 +31,12 @@ if [ -z "${MQTT_TLS_no_hostname_validation}" ]; then
 fi
 if [ -z "${MQTT_RETAIN}" ]; then
   MQTT_RETAIN='false'
+fi
+if [ -z "${ADD_TIMESTAMP}" ]; then
+  ADD_TIMESTAMP='true'
+fi
+if [ -z "${TIMESTAMP_ATTR}" ]; then
+  TIMESTAMP_ATTR='timestamp'
 fi
 MQTT_PASSWORD=''
 
@@ -163,6 +169,13 @@ function validate_input_parameters {
     echo "ERROR: ENDPOINT not defined. This parameter is mandatory!" >&2
     exit 1
   fi
+
+  if [ -z "$(validate_boolean ${ADD_TIMESTAMP})" ]; then
+    echo "ERROR: Environment variable 'ADD_TIMESTAMP' needs to be 'true' or 'false' (but is ${ADD_TIMESTAMP})!" >&2
+    exit 1
+  else
+    ADD_TIMESTAMP=$(validate_boolean ${ADD_TIMESTAMP})
+  fi
 }
 
 #-----------------------------------------------------------------------------
@@ -178,9 +191,15 @@ function get_http_json_endpoint {
     echo "  usage: get_http_json_endpoint <endpoint>" >&2
     return
   fi
+
   timestamp=$(date -Iseconds)
   json_payload=$(curl -s "${endpoint}")
-  echo ${json_payload} | jq -Mc '. += {"timestamp":"'${timestamp}'"}'
+
+  if [ "${ADD_TIMESTAMP}" == "true" ]; then
+    json_payload=$(echo ${json_payload} | jq -Mc '. += {"'${TIMESTAMP_ATTR}'":"'${timestamp}'"}')
+  fi
+
+  echo ${json_payload}
 }
 
 #-----------------------------------------------------------------------------
